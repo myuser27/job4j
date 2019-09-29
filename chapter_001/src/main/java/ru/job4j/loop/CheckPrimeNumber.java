@@ -5,13 +5,13 @@ public class CheckPrimeNumber
     public boolean check(int finish)
     {
         boolean prime=false;
-        int count=0;
-        for(int i=1;i<=finish;i++)
+        int count=2;
+        for(;count<=finish;count++)
         {
-            if(finish%i==0)
-                count++;
+            if(finish%count==0)
+                break;
         }
-        if(count==2)
+        if(count==finish)
             prime=true;
         return prime;
     }

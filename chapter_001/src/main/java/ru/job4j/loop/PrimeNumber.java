@@ -4,18 +4,19 @@ public class PrimeNumber
 {
     public int calc(int finish)
     {
-        int count1=0, count2=0;
+        int count=0;
         for(int i=2;i<=finish;i++)
         {
-            for(int j=2;j<=finish;j++)
+            for(int j=2;j<=i;j++)
             {
-                if (i % j == 0)
-                    count1++;
+                if (i%j==0)
+                {
+                    if(i==j)
+                        count++;
+                    break;
+                }
             }
-            if(count1==1)
-                count2++;
-            count1=0;
         }
-        return count2;
+        return count;
     }
 }

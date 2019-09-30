@@ -19,7 +19,7 @@ public class FindLoop
     public int indexOf(int[] data, int el, int start, int finish)
     {
         int index=-1;
-        for(int i=start-1;i<finish;i++)
+        for(int i=start;i<=finish;i++)
         {
             if(data[i]==el)
             {

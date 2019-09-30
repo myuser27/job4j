@@ -1,5 +1,11 @@
 package ru.job4j.calculator;
 
+/**
+ * Calculator - класс для элементарных арифмитических вычислений
+ *
+ * @author Aleksei Artiukhov
+ */
+
 public class Calculator
 {
     public static void add(double first, double second)
@@ -25,6 +31,12 @@ public class Calculator
         double result=first-second;
         System.out.println(first + "-" + second + " = " + result);
     }
+
+/**
+* Метод main
+*
+* @param args
+*/
 
     public static void main(String[] args)
     {

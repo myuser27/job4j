@@ -23,4 +23,22 @@ public class FindLoopTest
         int index=find.indexOf(arr,9);
         assertThat(index,is(-1));
     }
+
+   @Test
+   public void whenFind2()
+   {
+       FindLoop find=new FindLoop();
+       int[] arr=new int[] {1,2,3,4,5,6,7};
+       int index=find.indexOf(arr,2,1,4);
+       assertThat(index,is(1));
+   }
+
+    @Test
+    public void whenNotFind2()
+    {
+        FindLoop find=new FindLoop();
+        int[] arr=new int[] {1,2,3,4,5,6,7};
+        int index=find.indexOf(arr,2,3,6);
+        assertThat(index,is(-1));
+    }
 }

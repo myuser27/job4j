@@ -1,0 +1,26 @@
+package ru.job4j.array;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+
+public class EndsWithTest
+{
+    @Test
+    public void whenEndStringTrue()
+    {
+        char[] word={'H', 'e', 'l', 'l', 'o'};
+        char[] post={'l', 'o'};
+        boolean result=EndsWith.endString(word, post);
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void whenEndStringFalse()
+    {
+        char[] word={'H', 'e', 'l', 'l', 'o'};
+        char[] post={'l', 'a'};
+        boolean result=EndsWith.endString(word, post);
+        assertThat(result, is(false));
+    }
+}

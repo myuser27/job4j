@@ -1,17 +1,13 @@
 package ru.job4j.loop;
 
-public class Slash
-{
-    public static void draw(int size)
-    {
-        boolean left=false;
-        boolean right=false;
-        for (int row=0; row<size; row++)
-        {
-            for (int cell=0; cell<size; cell++)
-            {
-                left=row==cell ? true : false;
-                right=row+cell==size-1 ? true : false;
+public class Slash {
+    public static void draw(int size) {
+        boolean left = false;
+        boolean right = false;
+        for (int row = 0; row < size; row++) {
+            for (int cell = 0; cell < size; cell++) {
+                left = row == cell ? true : false;
+                right = row + cell == size - 1 ? true : false;
                 if (left) {
                     System.out.print("0");
                 } else if (right) {
@@ -25,8 +21,7 @@ public class Slash
         System.out.println();
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         System.out.println("Draw by 3");
         draw(3);
         System.out.println("Draw by 5");

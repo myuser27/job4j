@@ -5,12 +5,10 @@ import java.util.Arrays;
 public class Merge {
     public int[] merge(int[] first, int[] second) {
         int[] result = new int[first.length + second.length];
-
         if (first.length == 0) {
             result = Arrays.copyOf(second, second.length);
             return result;
         }
-
         int i1 = 0, i2 = 0, i3 = 0;
         boolean end = false;
         while (i3 < result.length - 1) {

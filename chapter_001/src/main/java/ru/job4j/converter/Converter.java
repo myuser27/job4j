@@ -4,15 +4,12 @@ public class Converter {
     public static int rubleToEuro(int value) {
         return value / 70;
     }
-
     public static int rubleToDollar(int value) {
         return value / 60;
     }
-
     public static int euroToRuble(int value) {
         return value * 70;
     }
-
     public static int dollarToRuble(int value) {
         return value * 60;
     }
@@ -26,7 +23,6 @@ public class Converter {
         System.out.println("180 rubles are " + dollar + " dollars.");
         System.out.println("40 euro are " + rub1 + " rubles.");
         System.out.println("40 dollars are " + rub2 + " rubles.");
-
         int in = 140;
         int expected = 2;
         int out = rubleToEuro(in);

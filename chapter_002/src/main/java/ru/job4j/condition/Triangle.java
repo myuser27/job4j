@@ -14,18 +14,15 @@ public class Triangle {
     }
 
     public double period(double ab, double ac, double bc) {
-        if (this.exist(ab, ac, bc)) {
-            return (ab + ac + bc)/2;
-        }
-        return -1;
+        return (ab + ac + bc)/2;
     }
 
     public double area() {
         double ab = a.distance(b);
         double ac = a.distance(c);
         double bc = b.distance(c);
-        double p = period(ab, ac, bc);
         if (this.exist(ab, ac, bc)) {
+            double p = period(ab, ac, bc);
             return sqrt(p*(p-ab)*(p-ac)*(p-bc));
         }
         return -1;

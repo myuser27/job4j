@@ -1,8 +1,9 @@
 package ru.job4j.animals;
 
 public class Animal {
-    public Animal() {
-        System.out.println("Load Aminal");
+    private String name;
+    public Animal(String name) {
+        this.name = name;
+        System.out.println("Load Aminal name: " + this.name);
     }
-
 }

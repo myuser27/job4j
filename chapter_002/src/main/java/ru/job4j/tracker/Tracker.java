@@ -9,8 +9,8 @@ public class Tracker {
 
     public int findIndexById(String id) {
         int index = -1;
-        for(int i = 0 ; i < position; i++ ) {
-            if(this.items[i].getId().equals(id)) {
+        for (int i = 0; i < position; i++) {
+            if (this.items[i].getId().equals(id)) {
                 index = i;
                 break;
             }
@@ -27,7 +27,8 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         int index = this.findIndexById(id);
-        if(index != -1) {
+        if (index != -1) {
+            item.setId(id);
             this.items[index] = item;
             result = true;
         }
@@ -37,10 +38,10 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         int index = this.findIndexById(id);
-        if(index != -1) {
+        if (index != -1) {
             this.items[index] = null;
-            System.arraycopy(this.items, index+1, this.items,
-                    index, this.items.length-index-1);
+            System.arraycopy(this.items, index + 1, this.items,
+                    index, this.items.length - index - 1);
             this.position--;
             result = true;
         }
@@ -52,10 +53,10 @@ public class Tracker {
     }
 
     public Item[] findByName(String key) {
-        Item[] tmp = new Item[this.position+1];
+        Item[] tmp = new Item[this.position + 1];
         int index = 0;
-        for(int i = 0; i < this.position; i++) {
-            if(this.items[i].getName().equals(key)) {
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i].getName().equals(key)) {
                 tmp[index] = this.items[i];
                 index++;
             }
@@ -65,8 +66,8 @@ public class Tracker {
 
     public Item findById(String id) {
         Item result = null;
-        for(int i = 0; i < this.position; i++) {
-            if(this.items[i].getId().equals(id)) {
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i].getId().equals(id)) {
                 result = this.items[i];
                 break;
             }

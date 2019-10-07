@@ -7,7 +7,7 @@ public class Max {
 
     public static int max(int first, int second, int third) {
         int tmp = Max.max(first, second);
-        return Max.max(tmp,third);
+        return Max.max(tmp, third);
     }
 
     public static int max(int first, int second, int third, int fourth) {

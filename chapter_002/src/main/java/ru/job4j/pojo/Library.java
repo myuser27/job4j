@@ -14,15 +14,15 @@ public class Library {
         books[2] = cc;
         books[3] = novel;
 
-        for (int i = 0 ; i < books.length ; i++) {
+        for (int i = 0; i < books.length; i++) {
             System.out.println(books[i].getName() + " - " + books[i].getCount());
         }
-        Book tmp = new Book("",0);
+        Book tmp = new Book("", 0);
         tmp = books[0];
         books[0] = books[3];
         books[3] = tmp;
-        for(Book b : books) {
-            if(b.getName().equals("Clean code")) {
+        for (Book b : books) {
+            if (b.getName().equals("Clean code")) {
                 System.out.println(b.getName() + " - " + b.getCount());
             }
         }

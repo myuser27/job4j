@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Tracker {
@@ -8,8 +9,8 @@ public class Tracker {
 
     public int findIndexById(String id) {
         int index = -1;
-        for(int i = 0 ; i < this.items.length; i++ ) {
-            if(this.items[i].getId() == id) {
+        for(int i = 0 ; i < position; i++ ) {
+            if(this.items[i].getId().equals(id)) {
                 index = i;
                 break;
             }
@@ -40,41 +41,33 @@ public class Tracker {
             this.items[index] = null;
             System.arraycopy(this.items, index+1, this.items,
                     index, this.items.length-index-1);
+            this.position--;
             result = true;
         }
         return result;
     }
 
     public Item[] findAll() {
-        Item[] fillitems = new Item[this.position+1];
-        for(int i = 0 ; i < fillitems.length ; i++) {
-            fillitems[i] = this.items[i];
-        }
-        return fillitems;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     public Item[] findByName(String key) {
         Item[] tmp = new Item[this.position+1];
         int index = 0;
-        for(Item item : this.items) {
-            if(item != null && item.getName().equals(key)) {
-                tmp[index] = item;
+        for(int i = 0; i < this.position; i++) {
+            if(this.items[i].getName().equals(key)) {
+                tmp[index] = this.items[i];
                 index++;
             }
         }
-
-        Item[] result = new Item[index+1];
-        for(int i = 0; i < result.length ; i++) {
-            result[i] = tmp[i];
-        }
-        return result;
+        return Arrays.copyOf(tmp, index);
     }
 
     public Item findById(String id) {
         Item result = null;
-        for(Item item : this.items) {
-            if(item.getId().equals(id)) {
-                result = item;
+        for(int i = 0; i < this.position; i++) {
+            if(this.items[i].getId().equals(id)) {
+                result = this.items[i];
                 break;
             }
         }

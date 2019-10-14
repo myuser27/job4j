@@ -15,6 +15,7 @@ public class PriorityQueue {
                     break;
                 }
             }
+            tasks.addLast(task);
         }
     }
 

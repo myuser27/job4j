@@ -13,7 +13,7 @@ public class PriorityQueueTest {
         queue.put(new Task("urgent", 1));
         queue.put(new Task("middle", 3));
         queue.put(new Task("lowest", 8));
-        Task result = queue.takelast();
+        Task result = queue.take();
         assertThat(result.getDesc(), is("urgent"));
     }
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConvertList {
-    public List<Integer> convert (List<int[]> list) {
+    public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<Integer>();
-        for(int[] el : list) {
+        for (int[] el : list) {
             for (int i : el) {
                 result.add(i);
             }

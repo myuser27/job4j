@@ -1,16 +1,17 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Tracker {
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<Item>(100);
     private int position = 0;
 
     public int findIndexById(String id) {
         int index = -1;
         for (int i = 0; i < position; i++) {
-            if (this.items[i].getId().equals(id)) {
+            if (this.items.get(i).getId().equals(id)) {
                 index = i;
                 break;
             }
@@ -20,7 +21,7 @@ public class Tracker {
 
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(this.position++, item);
         return item;
     }
 
@@ -29,7 +30,7 @@ public class Tracker {
         int index = this.findIndexById(id);
         if (index != -1) {
             item.setId(id);
-            this.items[index] = item;
+            this.items.set(index, item);
             result = true;
         }
         return result;
@@ -39,36 +40,32 @@ public class Tracker {
         boolean result = false;
         int index = this.findIndexById(id);
         if (index != -1) {
-            this.items[index] = null;
-            System.arraycopy(this.items, index + 1, this.items,
-                    index, this.items.length - index - 1);
+            this.items.remove(index);
             this.position--;
             result = true;
         }
         return result;
     }
 
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> findAll() {
+        return this.items.subList(0, this.position);
     }
 
-    public Item[] findByName(String key) {
-        Item[] tmp = new Item[this.position + 1];
-        int index = 0;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getName().equals(key)) {
-                tmp[index] = this.items[i];
-                index++;
+    public List<Item> findByName(String key) {
+        List<Item> tmp = new ArrayList<Item>();
+        for (Item i : this.items) {
+            if (i.getName().equals(key)) {
+                tmp.add(i);
             }
         }
-        return Arrays.copyOf(tmp, index);
+        return tmp;
     }
 
     public Item findById(String id) {
         Item result = null;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                result = this.items[i];
+        for (Item i : this.items) {
+            if (i.getId().equals(id)) {
+                result = i;
                 break;
             }
         }

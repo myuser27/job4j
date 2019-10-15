@@ -13,7 +13,7 @@ public class PriorityQueue {
             int count = 0;
             for (Task t : this.tasks) {
                 if (t.getPriority() > task.getPriority()) {
-                    this.tasks.add(this.tasks.indexOf(t), task);
+                    this.tasks.add(count, task);
                     break;
                 }
                 count++;

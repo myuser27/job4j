@@ -29,7 +29,17 @@ public class StringsCompareTest {
     }
 
     @Test
-    public void whenLeftGreaterThanRightResultShouldBePositive() {
+    public void whenLeftGreateThanRightResultShouldBePositive() {
+        StringsCompare compare = new StringsCompare();
+        int rst = compare.compare(
+                "Ivanova",
+                "Ivanov"
+        );
+        assertThat(rst, greaterThan(0));
+    }
+
+    @Test
+    public void whenLeftLessThanRightResultShouldBePositive() {
         StringsCompare compare = new StringsCompare();
         int rst = compare.compare(
                 "Petrov",

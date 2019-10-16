@@ -14,8 +14,8 @@ public class StringsCompare implements Comparator<String> {
                 break;
             }
         }
-        if (result == 0 && second.length() > first.length()) {
-            result = -1;
+        if (result == 0 && second.length() != first.length()) {
+            result = second.length() > first.length() ? -1 : 1;
         }
         return result;
     }

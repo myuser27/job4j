@@ -9,6 +9,27 @@ public class Bank {
         return this.accounts;
     }
 
+    public User findByPassport(String passport) {
+        User user = null;
+        for (User u : this.accounts.keySet()) {
+            if (u.getPassport().equals(passport)) {
+                user = u;
+                break;
+            }
+        }
+        return user;
+    }
+
+    public Account findByAccount(User user, String requisite) {
+        Account account = null;
+        for (Account a : this.accounts.get(user)) {
+            if (a.getRequisites().equals(requisite)) {
+                account = a;
+            }
+        }
+        return account;
+    }
+
     public void addUser(User user) {
         this.accounts.put(user, new ArrayList<Account>());
     }
@@ -21,20 +42,18 @@ public class Bank {
 
     public void addAccountToUser(String passport, Account account) {
         if (!this.accounts.isEmpty()) {
-            for (User u : this.accounts.keySet()) {
-                if (u.getPassport().equals(passport)) {
-                    this.accounts.get(u).add(account);
-                }
+            User user = this.findByPassport(passport);
+            if (user != null) {
+                this.accounts.get(user).add(account);
             }
         }
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
         if (!this.accounts.isEmpty()) {
-            for (User u : this.accounts.keySet()) {
-                if (u.getPassport().equals(passport)) {
-                    this.accounts.get(u).remove(account);
-                }
+            User user = this.findByPassport(passport);
+            if (user != null) {
+                this.accounts.get(user).remove(account);
             }
         }
     }
@@ -42,10 +61,9 @@ public class Bank {
     public List<Account> getUserAccounts(String passport) {
         List<Account> result = new ArrayList<Account>();
         if (!this.accounts.isEmpty()) {
-            for (User u : this.accounts.keySet()) {
-                if (u.getPassport().equals(passport)) {
-                    result = this.accounts.get(u);
-                }
+            User user = this.findByPassport(passport);
+            if (user != null) {
+                result = this.accounts.get(user);
             }
         }
         return result;
@@ -56,35 +74,22 @@ public class Bank {
                                  double amount) {
         boolean result = false;
         if (!this.accounts.isEmpty()) {
-            User srcUser = null, destUser = null;
-            for (User u : this.accounts.keySet()) {
-                if (u.getPassport().equals(srcPassport)) {
-                    srcUser = u;
-                }
-                if (u.getPassport().equals(destPassport)) {
-                    destUser = u;
-                }
-                if (srcUser != null && destUser != null) {
-                    for (Account a : this.accounts.get(srcUser)) {
-                        if (a.getRequisites().equals(srcRequisite)) {
-                            if (a.getValue() - amount > 0) {
-                                a.setValue(a.getValue() - amount);
-                                result = true;
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
+            User srcUser = this.findByPassport(srcPassport);
+            User destUser = this.findByPassport(destPassport);
+            if (srcUser != null && destUser != null) {
+                Account srcAccount = this.findByAccount(srcUser, srcRequisite);
+                if (srcAccount != null) {
+                    if (srcAccount.getValue() - amount > 0) {
+                        srcAccount.setValue(srcAccount.getValue() - amount);
+                        result = true;
                     }
-                    if (result) {
-                        result = false;
-                        for (Account a : this.accounts.get(destUser)) {
-                            if (a.getRequisites().equals(destRequisite)) {
-                                a.setValue(a.getValue() + amount);
-                                result = true;
-                                break;
-                            }
-                        }
+                }
+                if (result) {
+                    result = false;
+                    Account destAccount = this.findByAccount(destUser, destRequisite);
+                    if (destAccount != null) {
+                        destAccount.setValue(destAccount.getValue() + amount);
+                        result = true;
                     }
                 }
             }

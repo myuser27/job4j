@@ -9,7 +9,7 @@ public class StringsCompare implements Comparator<String> {
         int minlen = first.length() <= second.length()
                 ? first.length() : second.length();
         for (int i = 0; i < minlen; i++) {
-            result = Integer.compare((int) first.charAt(i), (int) second.charAt(i));
+            result = Character.compare(first.charAt(i), second.charAt(i));
             if (result != 0) {
                 break;
             }

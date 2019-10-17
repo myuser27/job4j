@@ -24,7 +24,7 @@ public class Account {
     @Override
     public boolean equals(Object o) {
         boolean result = false;
-        if(o != null && this.getClass() == o.getClass()) {
+        if (o != null && this.getClass() == o.getClass()) {
             Account account = (Account) o;
             result = this.getRequisites().equals(account.getRequisites())
                     && this.getValue() == account.getValue();
@@ -36,7 +36,7 @@ public class Account {
     public int hashCode() {
         int result = 1;
         result = 37 * result
-                + (this.getValue() == 0 ? 0 :(int) this.getValue());
+                + (this.getValue() == 0 ? 0 : (int) this.getValue());
         result = 37 * result
                 + (this.getRequisites() == null
                 ? 0 : this.getRequisites().hashCode());

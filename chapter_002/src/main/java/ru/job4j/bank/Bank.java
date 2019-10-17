@@ -14,15 +14,15 @@ public class Bank {
     }
 
     public void deleteUser(User user) {
-        if(!this.accounts.isEmpty()){
+        if (!this.accounts.isEmpty()) {
             this.accounts.remove(user);
         }
     }
 
     public void addAccountToUser(String passport, Account account) {
-        if(!this.accounts.isEmpty()) {
-            for(User u : this.accounts.keySet()) {
-                if(u.getPassport().equals(passport)) {
+        if (!this.accounts.isEmpty()) {
+            for (User u : this.accounts.keySet()) {
+                if (u.getPassport().equals(passport)) {
                     this.accounts.get(u).add(account);
                 }
             }
@@ -30,20 +30,20 @@ public class Bank {
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
-        if(!this.accounts.isEmpty()) {
-            for(User u : this.accounts.keySet()) {
-                if(u.getPassport().equals(passport)) {
+        if (!this.accounts.isEmpty()) {
+            for (User u : this.accounts.keySet()) {
+                if (u.getPassport().equals(passport)) {
                     this.accounts.get(u).remove(account);
                 }
             }
         }
     }
 
-    public List<Account> getUserAccounts (String passport) {
+    public List<Account> getUserAccounts(String passport) {
         List<Account> result = new ArrayList<Account>();
-        if(!this.accounts.isEmpty()) {
-            for(User u : this.accounts.keySet()) {
-                if(u.getPassport().equals(passport)) {
+        if (!this.accounts.isEmpty()) {
+            for (User u : this.accounts.keySet()) {
+                if (u.getPassport().equals(passport)) {
                     result = this.accounts.get(u);
                 }
             }
@@ -51,23 +51,23 @@ public class Bank {
         return result;
     }
 
-    public boolean transferMoney (String srcPassport, String srcRequisite,
-                                  String destPassport, String destRequisite,
-                                  double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite,
+                                 String destPassport, String destRequisite,
+                                 double amount) {
         boolean result = false;
-        if(!this.accounts.isEmpty()) {
+        if (!this.accounts.isEmpty()) {
             User srcUser = null, destUser = null;
-            for(User u : this.accounts.keySet()) {
-                if(u.getPassport().equals(srcPassport)) {
+            for (User u : this.accounts.keySet()) {
+                if (u.getPassport().equals(srcPassport)) {
                     srcUser = u;
                 }
-                if(u.getPassport().equals(destPassport)) {
+                if (u.getPassport().equals(destPassport)) {
                     destUser = u;
                 }
-                if(srcUser != null && destUser !=null) {
-                    for(Account a : this.accounts.get(srcUser)) {
+                if (srcUser != null && destUser != null) {
+                    for (Account a : this.accounts.get(srcUser)) {
                         if (a.getRequisites().equals(srcRequisite)) {
-                            if(a.getValue() - amount > 0) {
+                            if (a.getValue() - amount > 0) {
                                 a.setValue(a.getValue() - amount);
                                 result = true;
                                 break;
@@ -76,7 +76,7 @@ public class Bank {
                             }
                         }
                     }
-                    if(result == true) {
+                    if (result) {
                         result = false;
                         for (Account a : this.accounts.get(destUser)) {
                             if (a.getRequisites().equals(destRequisite)) {

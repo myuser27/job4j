@@ -20,7 +20,7 @@ public class User {
     @Override
     public boolean equals(Object o) {
         boolean result = false;
-        if(o != null && this.getClass() == o.getClass()) {
+        if (o != null && this.getClass() == o.getClass()) {
             User user = (User) o;
             result = this.getName().equals(user.getName())
                     && this.getPassport().equals(user.getPassport());

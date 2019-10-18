@@ -30,6 +30,15 @@ public class Bank {
         return account;
     }
 
+    public Account findAccountByPassport(String passport, String requisite) {
+        Account result = null;
+        User user = this.findByPassport(passport);
+        if (user != null) {
+            result = this.findByAccount(user, requisite);
+        }
+        return result;
+    }
+
     public void addUser(User user) {
         this.accounts.put(user, new ArrayList<Account>());
     }
@@ -74,24 +83,15 @@ public class Bank {
                                  double amount) {
         boolean result = false;
         if (!this.accounts.isEmpty()) {
-            User srcUser = this.findByPassport(srcPassport);
-            User destUser = this.findByPassport(destPassport);
-            if (srcUser != null && destUser != null) {
-                Account srcAccount = this.findByAccount(srcUser, srcRequisite);
-                if (srcAccount != null) {
-                    if (srcAccount.getValue() - amount > 0) {
-                        srcAccount.setValue(srcAccount.getValue() - amount);
-                        result = true;
-                    }
-                }
-                if (result) {
-                    result = false;
-                    Account destAccount = this.findByAccount(destUser, destRequisite);
-                    if (destAccount != null) {
-                        destAccount.setValue(destAccount.getValue() + amount);
-                        result = true;
-                    }
-                }
+            Account srcAccount = this.findAccountByPassport(srcPassport,
+                    srcRequisite);
+            Account destAccount = this.findAccountByPassport(destPassport,
+                    destRequisite);
+            if (srcAccount != null && destAccount != null
+                    && srcAccount.getValue() > amount) {
+                srcAccount.setValue(srcAccount.getValue() - amount);
+                destAccount.setValue(destAccount.getValue() + amount);
+                result = true;
             }
         }
         return result;

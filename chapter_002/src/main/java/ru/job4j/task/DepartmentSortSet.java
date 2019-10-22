@@ -19,6 +19,17 @@ public class DepartmentSortSet {
         return depSet;
     }
 
+    public Set<String> fillMissingTreeSet(String[] array) {
+        Set<String> depSet = new TreeSet<>();
+        Collections.addAll(depSet, array);
+        for (int i = 0; i < this.names.length; i++) {
+            if (!depSet.contains(this.names[i])) {
+                depSet.add(this.names[i]);
+            }
+        }
+        return depSet;
+    }
+
     public Set<String> sortReversTreeSet(String[] array) {
         Set<String> depSet = new TreeSet<>(new Comparator<String>() {
             @Override
@@ -74,8 +85,11 @@ public class DepartmentSortSet {
     }
 
     public static void main(String[] args) {
+        String[] dep = {"K1\\SK1", "K1\\SK2",
+                "K1\\SK1\\SSK1", "K1\\SK1\\SSK2",
+                "K2", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"};
         DepartmentSortSet dss = new DepartmentSortSet();
-        Set<String> resultSet = dss.fillMissingTreeSet();
+        Set<String> resultSet = dss.fillMissingTreeSet(dep);
         System.out.println(resultSet);
         System.out.println();
         String[] array = new String[resultSet.size()];

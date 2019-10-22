@@ -11,28 +11,28 @@ public class School {
         public Student(int score) {
             this.score = score;
         }
-    }
 
-    //public List<Student> collect(List<Student> students, Predicate<Student> predict) {
-    public List<Student> collect(List<Student> students) {
-        List<Student> class10a = students.stream().filter(student -> student.score < 50).collect(Collectors.toList());
-        //class10a.forEach(System.out::println);
-        for(Student s : class10a) {
-            System.out.println(s.score);
+        public int getScore() {
+            return this.score;
         }
-        return class10a;
+
+        @Override
+        public boolean equals(Object obj) {
+            boolean result = false;
+            Student other = (Student) obj;
+            if (this == obj || this.score == other.score) {
+                result = true;
+            }
+            return result;
+        }
+
+        @Override
+        public int hashCode() {
+            return 17 * this.score;
+        }
     }
 
-    public static void main(String[] args) {
-        List<Student> students = List.of(
-                new Student(40),
-                new Student(45),
-                new Student(49),
-                new Student(55),
-                new Student(65),
-                new Student(90),
-                new Student(95),
-                new Student(100));
-        List<Student> cl10a = new School().collect(students);
+    public List<Student> collect(List<Student> students, Predicate<Student> pred) {
+        return students.stream().filter(pred).collect(Collectors.toList());
     }
 }

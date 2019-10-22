@@ -47,6 +47,23 @@ public class DepartmentSortSet {
         return depSet;
     }
 
+    public Set<String> abs(String[] array) {
+        Set<String> depSet = new TreeSet<>(new Comparator<String>() {
+            @Override
+            public int compare(String str1, String str2) {
+                int result = 0;
+                if (str1.length() != str2.length()) {
+                    result = str1.length() > str2.length() ? 1 : -1;
+                } else {
+                    result = str2.compareTo(str1);
+                }
+                return result;
+            }
+        });
+        Collections.addAll(depSet, array);
+        return depSet;
+    }
+
     public List<String> fillMissingArrayList() {
         List<String> depList = new ArrayList<>();
         Collections.addAll(depList, this.departments);

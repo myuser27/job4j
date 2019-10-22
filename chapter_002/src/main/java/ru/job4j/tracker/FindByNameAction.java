@@ -13,11 +13,10 @@ public class FindByNameAction extends BaseAction {
         List<Item> items = tracker.findByName(name);
         if (items.size() > 0) {
             for (Item i : items) {
-                System.out.println("Item id: " + i.getId() + ", name: "
-                        + i.getName());
+                output.accept("Item id: " + i.getId() + ", name: " + i.getName());
             }
         } else {
-            System.out.println("Items with name " + name + " not found.");
+            output.accept("Items with name " + name + " not found.");
         }
         return true;
     }

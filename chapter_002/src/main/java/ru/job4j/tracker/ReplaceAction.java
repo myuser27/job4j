@@ -11,9 +11,9 @@ public class ReplaceAction extends BaseAction {
         String name = input.askStr("Enter new name:");
         Item item = new Item(name);
         if (tracker.replace(id, item)) {
-            System.out.println("Change success.");
+            output.accept("Change success.");
         } else {
-            System.out.println("Change failed.");
+            output.accept("Change failed.");
         }
         return true;
     }

@@ -10,9 +10,9 @@ public class FindByIdAction extends BaseAction {
         String id = input.askStr("Enter item id:");
         Item item = tracker.findById(id);
         if (item != null) {
-            System.out.println("name: " + item.getName());
+            output.accept("name: " + item.getName());
         } else {
-            System.out.println("Items with id: " + id + " not found.");
+            output.accept("Items with id: " + id + " not found.");
         }
         return true;
     }

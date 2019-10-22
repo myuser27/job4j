@@ -9,13 +9,22 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class StartUITest {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private final PrintStream def = System.out;
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream def = new PrintStream(out);
+
+        @Override
+        public void accept(String s) {
+            def.println(s);
+        }
+    };
+
 
     @Before
     public void loadOut() {
@@ -24,7 +33,7 @@ public class StartUITest {
 
     @After
     public void loadDefault() {
-        System.setOut(this.def);
+        System.setOut(System.out);
     }
 
     @Test
@@ -33,7 +42,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> actions = new ArrayList<UserAction>();
         actions.add(action);
-        new StartUI().init(input, new Tracker(), actions);
+        new StartUI(this.output).init(input, new Tracker(), actions);
         assertThat(action.isCall(), is(true));
     }
 
@@ -43,7 +52,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> actions = new ArrayList<UserAction>();
         actions.add(action);
-        new StartUI().init(input, new Tracker(), actions);
+        new StartUI(this.output).init(input, new Tracker(), actions);
         String expect = new StringJoiner(System.lineSeparator(), "",
                 System.lineSeparator()).add("Menu:")
                 .add("0. Stub action").toString();

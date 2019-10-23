@@ -1,8 +1,6 @@
 package ru.job4j.turism;
 
-import ru.job4j.prof.Profession;
-
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,17 +46,19 @@ public class Profiles {
         }
     }
 
-    List<Address> collect(List<Profile> profiles) {
-        return profiles.stream().map(p -> p.address).collect(Collectors.toList());
+    public List<Address> collect(List<Profile> profiles) {
+        return profiles.stream().map(p -> p.address).distinct()
+                .collect(Collectors.toList());
     }
 
-    public static void main(String[] args) {
-        List<Profile> profiles = List.of(
-                new Profile(new Address("City1", "Street1", 1, 1)),
-                new Profile(new Address("City1", "Street2", 10, 5)),
-                new Profile(new Address("City2", "Street4", 18, 45)),
-                new Profile(new Address("City3", "Street1", 3, 12)));
-        Profiles pr = new Profiles();
-        List<Address> a = pr.collect(profiles);
+    public List<Address> sorted(List<Address> addresses) {
+        addresses.sort(new Comparator<Address>() {
+            @Override
+            public int compare(Address o1, Address o2) {
+                int result = o1.city.compareTo(o2.city);
+                return result;
+            }
+        });
+        return addresses;
     }
 }

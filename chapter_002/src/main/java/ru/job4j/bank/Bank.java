@@ -11,21 +11,22 @@ public class Bank {
 
     public User findByPassport(String passport) {
         User user = null;
-        for (User u : this.accounts.keySet()) {
-            if (u.getPassport().equals(passport)) {
-                user = u;
-                break;
-            }
+        if (this.accounts.keySet().stream()
+                .filter(u -> u.getPassport().equals(passport)).iterator().hasNext()) {
+            user = this.accounts.keySet().stream()
+                    .filter(u -> u.getPassport().equals(passport)).iterator().next();
         }
         return user;
     }
 
     public Account findByAccount(User user, String requisite) {
         Account account = null;
-        for (Account a : this.accounts.get(user)) {
-            if (a.getRequisites().equals(requisite)) {
-                account = a;
-            }
+        if (this.accounts.get(user).stream()
+                .filter(a -> a.getRequisites().equals(requisite))
+                .iterator().hasNext()) {
+            account = this.accounts.get(user).stream()
+                    .filter(a -> a.getRequisites().equals(requisite))
+                    .iterator().next();
         }
         return account;
     }

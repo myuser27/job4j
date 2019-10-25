@@ -71,6 +71,7 @@ public class SchoolTest {
         List<School.Student> students = List.of(
                 new School.Student("name1", 40),
                 new School.Student("name2", 45),
+                new School.Student("name1", 40),
                 new School.Student("name3", 49));
         Predicate<School.Student> classC = p -> p.getScore() != 0;
         Map<String, School.Student> expect = Map.of(

@@ -14,10 +14,13 @@ public class School {
             this.name = name;
             this.score = score;
         }
+        public String getName() {
+            return this.name;
+        }
 
         @Override
         public int compareTo(Student o) {
-            return Integer.compare(this.score, o.score);
+            return Integer.compare(o.score, this.score);
         }
 
         @Override

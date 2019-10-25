@@ -25,4 +25,20 @@ public class User implements Comparable<User> {
         }
         return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        User other = (User) obj;
+        if (this == obj || (this.age == other.age
+                && this.name.equals(other.name))) {
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        return 17 * this.age + this.name.hashCode();
+    }
 }

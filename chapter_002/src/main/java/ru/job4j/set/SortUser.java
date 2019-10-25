@@ -9,7 +9,9 @@ public class SortUser {
     }
 
     public List<User> sortNameLength(List<User> list) {
-        list.sort(new Comparator<User>() {
+        ArrayList<User> users = new ArrayList<>();
+        users.addAll(list);
+        users.sort(new Comparator<User>() {
             @Override
             public int compare(User u1, User u2) {
                 int result = 0;
@@ -19,11 +21,13 @@ public class SortUser {
                 return result;
             }
         });
-        return list;
+        return users;
     }
 
     public List<User> sortByAllFields(List<User> list) {
-        list.sort(new Comparator<User>() {
+        ArrayList<User> users = new ArrayList<>();
+        users.addAll(list);
+        users.sort(new Comparator<User>() {
             @Override
             public int compare(User u1, User u2) {
                 int result = u1.getName().compareTo(u2.getName());
@@ -35,7 +39,7 @@ public class SortUser {
                 return result;
             }
         });
-        return list;
+        return users;
     }
 
     public static void main(String[] args) {

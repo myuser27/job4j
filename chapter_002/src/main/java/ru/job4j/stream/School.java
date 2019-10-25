@@ -17,9 +17,7 @@ public class School {
 
         @Override
         public int compareTo(Student o) {
-            int result = 0;
-            result = this.score < o.score ? 1 : -1;
-            return result;
+            return Integer.compare(this.score, o.score);
         }
 
         @Override

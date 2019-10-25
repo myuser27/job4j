@@ -47,18 +47,12 @@ public class Profiles {
     }
 
     public List<Address> collect(List<Profile> profiles) {
-        return profiles.stream().map(p -> p.address).distinct()
-                .collect(Collectors.toList());
-    }
-
-    public List<Address> sorted(List<Address> addresses) {
-        addresses.sort(new Comparator<Address>() {
+        return profiles.stream().map(p -> p.address).sorted(new Comparator<Address>() {
             @Override
             public int compare(Address o1, Address o2) {
                 int result = o1.city.compareTo(o2.city);
                 return result;
             }
-        });
-        return addresses;
+        }).distinct().collect(Collectors.toList());
     }
 }

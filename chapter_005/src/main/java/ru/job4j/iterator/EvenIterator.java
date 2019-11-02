@@ -12,7 +12,7 @@ public class EvenIterator implements Iterator {
     }
 
     public boolean isEven(int index) {
-        return this.numbers[index] % 2 == 0 ? true : false;
+        return this.numbers[index] % 2 == 0;
     }
 
     public int getIndexNextEven(int index) {

@@ -21,12 +21,15 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void remove(int index) {
-        System.arraycopy(this.array,
-                index + 1,
-                this.array,
-                index,
-                (this.array.length - 1) - index);
+        if(index < this.index) {
+            System.arraycopy(this.array,
+                    index + 1,
+                    this.array,
+                    index,
+                    (this.array.length - 1) - index);
+        }
         this.index--;
+        this.array[this.index] = null;
     }
 
     public T get(int index) {

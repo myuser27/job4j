@@ -37,7 +37,20 @@ public class SimpleArrayTest {
         sa.remove(1);
         assertThat(sa.get(0), is("test1"));
         assertThat(sa.get(1), is("test3"));
-        assertThat(sa.get(3), is("test4"));
+        assertThat(sa.get(2), is("test4"));
+    }
+
+    @Test
+    public void removeLastElementTest() {
+        SimpleArray sa = new SimpleArray(4);
+        sa.add("test1");
+        sa.add("test2");
+        sa.add("test3");
+        sa.add("test4");
+        sa.remove(3);
+        assertThat(sa.get(0), is("test1"));
+        assertThat(sa.get(1), is("test2"));
+        assertThat(sa.get(2), is("test3"));
     }
 
     @Test

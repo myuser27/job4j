@@ -13,9 +13,12 @@ public class Converter {
                 if (iterator != null && iterator.hasNext()) {
                     current = iterator;
                 } else {
-                    if (it.hasNext()) {
+                    while (it.hasNext()) {
                         iterator = it.next();
-                        current = iterator;
+                        if(iterator.hasNext()) {
+                            current = iterator;
+                            break;
+                        }
                     }
                 }
                 return current;
@@ -34,13 +37,10 @@ public class Converter {
             @Override
             public Integer next() {
                 Iterator<Integer> iter = select();
-                Integer result = null;
                 if (iter == null) {
                     throw new NoSuchElementException();
-                } else {
-                    result = iter.next();
                 }
-                return result;
+                return iter.next();
             }
         };
     }

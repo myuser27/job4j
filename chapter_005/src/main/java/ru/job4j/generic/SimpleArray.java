@@ -21,10 +21,11 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void remove(int index) {
-        while (this.array.length - 1 > index) {
-            this.array[index] = this.array[index + 1];
-            index++;
-        }
+        System.arraycopy(this.array,
+                index + 1,
+                this.array,
+                index,
+                (this.array.length - 1) - index);
         this.index--;
     }
 

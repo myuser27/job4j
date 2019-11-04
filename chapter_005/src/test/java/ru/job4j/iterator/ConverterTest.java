@@ -87,7 +87,7 @@ public class ConverterTest {
     }
 
     @Test
-    public void hasNextShouldReturnTrueInCaseOfEmptyIterators() {
+    public void hasNextShouldReturnTrueInCaseOfEmptyIteratorsAndNotEmpty() {
         Iterator<Integer> it1 = (new ArrayList<Integer>()).iterator();
         Iterator<Integer> it2 = (new ArrayList<Integer>()).iterator();
         Iterator<Integer> it3 = (Arrays.asList(1, 2)).iterator();

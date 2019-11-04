@@ -15,7 +15,7 @@ public class Converter {
                 } else {
                     while (it.hasNext()) {
                         iterator = it.next();
-                        if(iterator.hasNext()) {
+                        if (iterator.hasNext()) {
                             current = iterator;
                             break;
                         }
@@ -27,11 +27,7 @@ public class Converter {
             @Override
             public boolean hasNext() {
                 Iterator<Integer> iter = select();
-                boolean result = false;
-                if (iter != null) {
-                    result = select().hasNext();
-                }
-                return result;
+                return (iter != null) && select().hasNext();
             }
 
             @Override

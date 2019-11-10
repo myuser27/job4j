@@ -41,7 +41,7 @@ public class DinamicArray<E> implements Iterable<E> {
         return new Iterator<E>() {
             @Override
             public boolean hasNext() {
-                return container.length > position;
+                return index > position;
             }
 
             @Override

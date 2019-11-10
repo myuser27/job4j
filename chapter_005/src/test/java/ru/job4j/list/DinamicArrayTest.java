@@ -95,4 +95,24 @@ public class DinamicArrayTest {
         assertThat(iterator.next(), is("4"));
         iterator.next();
     }
+
+    @Test
+    public void iteratorNoElementsTest() {
+        DinamicArray container = new DinamicArray(10);
+        Iterator iterator = container.iterator();
+        assertThat(iterator.hasNext(), is(false));
+    }
+
+    @Test
+    public void iteratorNotFullArrayTest() {
+        DinamicArray container = new DinamicArray(10);
+        container.add("1");
+        container.add("2");
+        Iterator iterator = container.iterator();
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is("1"));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is("2"));
+        assertThat(iterator.hasNext(), is(false));
+    }
 }

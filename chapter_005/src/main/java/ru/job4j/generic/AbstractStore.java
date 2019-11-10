@@ -1,24 +1,25 @@
 package ru.job4j.generic;
 
-public abstract class AbstractStore implements Store {
-    private Base[] arrays;
+public abstract class AbstractStore<E extends Base> implements Store<E> {
+    private SimpleArray<E> arrays;
     private int index = 0;
 
     public AbstractStore(int count) {
-        this.arrays = new Base[count];
+        this.arrays = new SimpleArray<>(count);
     }
 
     @Override
-    public void add(Base model) {
-        this.arrays[this.index++] = model;
+    public void add(E model) {
+        this.arrays.add(model);
+        this.index++;
     }
 
     @Override
-    public boolean replace(String id, Base model) {
+    public boolean replace(String id, E model) {
         boolean result = false;
-        for (int i = 0; i < this.arrays.length; i++) {
-            if (this.arrays[i].getId().equals(id)) {
-                this.arrays[i] = model;
+        for (int i = 0; i < this.index; i++) {
+            if (this.arrays.get(i).getId().equals(id)) {
+                this.arrays.set(i, model);
                 result = true;
                 break;
             }
@@ -29,17 +30,9 @@ public abstract class AbstractStore implements Store {
     @Override
     public boolean delete(String id) {
         boolean result = false;
-        for (int i = 0; i < this.arrays.length; i++) {
-            if (this.arrays[i].getId().equals(id)) {
-                if (i < this.index) {
-                    System.arraycopy(this.arrays,
-                            i + 1,
-                            this.arrays,
-                            i,
-                            (this.arrays.length - 1) - i);
-                }
-                this.index--;
-                this.arrays[this.index] = null;
+        for (int i = 0; i < this.index; i++) {
+            if (this.arrays.get(i).getId().equals(id)) {
+                this.arrays.remove(i);
                 result = true;
                 break;
             }
@@ -48,14 +41,14 @@ public abstract class AbstractStore implements Store {
     }
 
     @Override
-    public Base findById(String id) {
-        Base base = null;
-        for (int i = 0; i < this.arrays.length; i++) {
-            if (this.arrays[i].getId().equals(id)) {
-                base = this.arrays[i];
+    public E findById(String id) {
+        E result = null;
+        for (int i = 0; i < this.index; i++) {
+            if (this.arrays.get(i).getId().equals(id)) {
+                result = this.arrays.get(i);
                 break;
             }
         }
-        return base;
+        return result;
     }
 }

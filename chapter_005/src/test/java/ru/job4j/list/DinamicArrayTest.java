@@ -115,4 +115,30 @@ public class DinamicArrayTest {
         assertThat(iterator.next(), is("2"));
         assertThat(iterator.hasNext(), is(false));
     }
+
+    @Test
+    public void whenTwoiteratorsTest() {
+        DinamicArray container = new DinamicArray(2);
+        container.add("1");
+        container.add("2");
+        container.add("3");
+        container.add("4");
+        Iterator iterator = container.iterator();
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is("1"));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is("2"));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is("3"));
+        Iterator newIterator = container.iterator();
+        assertThat(newIterator.hasNext(), is(true));
+        assertThat(newIterator.next(), is("1"));
+        assertThat(newIterator.hasNext(), is(true));
+        assertThat(newIterator.next(), is("2"));
+        assertThat(newIterator.hasNext(), is(true));
+        assertThat(newIterator.next(), is("3"));
+        assertThat(newIterator.hasNext(), is(true));
+        assertThat(newIterator.next(), is("4"));
+        assertThat(newIterator.hasNext(), is(false));
+    }
 }

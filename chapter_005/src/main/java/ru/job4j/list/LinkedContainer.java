@@ -10,7 +10,6 @@ public class LinkedContainer<E> implements Iterable<E> {
     private int size = 0;
     private int position = 0;
     private int modCount = 0;
-    private int expectModCount = 0;
 
     private class Node<E> {
         E data;
@@ -45,7 +44,8 @@ public class LinkedContainer<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        expectModCount = modCount;
+        position = 0;
+        int expectModCount = modCount;
         return new Iterator<E>() {
             @Override
             public boolean hasNext() {
@@ -68,15 +68,5 @@ public class LinkedContainer<E> implements Iterable<E> {
                 return result.data;
             }
         };
-    }
-
-    public static void main(String[] args) {
-        LinkedContainer lc = new LinkedContainer();
-        lc.add("1");
-        lc.add("2");
-        lc.add("3");
-        System.out.println(lc.get(0));
-        System.out.println(lc.get(1));
-        System.out.println(lc.get(2));
     }
 }

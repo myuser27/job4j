@@ -23,9 +23,6 @@ public class SimpleArrayList<E> {
             }
             tmpLink = tmpLink.next;
         }
-        /*result = tmpLink.next.data;
-        tmpLink.next = tmpLink.next.next;
-        this.size--;*/
         return result;
     }
 

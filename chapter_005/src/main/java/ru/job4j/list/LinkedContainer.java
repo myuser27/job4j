@@ -35,6 +35,23 @@ public class LinkedContainer<E> implements Iterable<E> {
         this.size++;
     }
 
+    public void addFirst(E value) {
+        Node<E> newElement = new Node<>(value);
+        if (this.first == null) {
+            this.first = newElement;
+        } else {
+            newElement.next = this.first;
+            this.first = newElement;
+        }
+        this.size++;
+    }
+
+    public E deleteFirst() {
+        E result = this.first.data;
+        this.first = this.first.next;
+        return result;
+    }
+
     public E get(int index) {
         Node<E> result = this.first;
         for (int i = 0; i < index; i++) {

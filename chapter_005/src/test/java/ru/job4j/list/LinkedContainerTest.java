@@ -16,10 +16,8 @@ public class LinkedContainerTest {
         LinkedContainer container = new LinkedContainer();
         container.add("1");
         container.add("2");
-        container.add("3");
         assertThat(container.get(0), is("1"));
         assertThat(container.get(1), is("2"));
-        assertThat(container.get(2), is("3"));
     }
 
     @Test
@@ -27,13 +25,10 @@ public class LinkedContainerTest {
         LinkedContainer container = new LinkedContainer();
         container.add("1");
         container.add("2");
-        container.add("3");
         Iterator iterator = container.iterator();
         assertThat(iterator.next(), is("1"));
         assertThat(iterator.hasNext(), is(true));
         assertThat(iterator.next(), is("2"));
-        assertThat(iterator.hasNext(), is(true));
-        assertThat(iterator.next(), is("3"));
         assertThat(iterator.hasNext(), is(false));
     }
 
@@ -85,5 +80,26 @@ public class LinkedContainerTest {
         assertThat(iterator.next(), is("3"));
         Iterator newIterator = container.iterator();
         assertThat(newIterator.next(), is("1"));
+    }
+
+    @Test
+    public void addFirstTest() {
+        LinkedContainer container = new LinkedContainer();
+        container.addFirst("1");
+        container.addFirst("2");
+        container.addFirst("3");
+        assertThat(container.get(0), is("3"));
+        assertThat(container.get(1), is("2"));
+        assertThat(container.get(2), is("1"));
+    }
+
+    @Test
+    public void deleteFirstTest() {
+        LinkedContainer container = new LinkedContainer();
+        container.addFirst("1");
+        container.addFirst("2");
+        container.addFirst("3");
+        assertThat(container.deleteFirst(), is("3"));
+        assertThat(container.deleteFirst(), is("2"));
     }
 }

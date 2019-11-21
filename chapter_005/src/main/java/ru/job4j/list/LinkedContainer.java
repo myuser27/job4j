@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 public class LinkedContainer<E> implements Iterable<E> {
     private Node<E> first = null;
     private Node<E> last = null;
+    private Node<E> current = null;
     private int size = 0;
     private int position = 0;
     private int modCount = 0;
@@ -45,6 +46,7 @@ public class LinkedContainer<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         position = 0;
+        current = null;
         int expectModCount = modCount;
         return new Iterator<E>() {
             @Override
@@ -60,10 +62,11 @@ public class LinkedContainer<E> implements Iterable<E> {
                 if (position == size) {
                     throw new NoSuchElementException();
                 }
-                Node<E> result = first;
-                for (int i = 0; i < position; i++) {
-                    result = result.next;
+                if (current == null) {
+                    current = first;
                 }
+                Node<E> result = current;
+                current = current.next;
                 position++;
                 return result.data;
             }

@@ -85,12 +85,5 @@ public class LinkedContainerTest {
         assertThat(iterator.next(), is("3"));
         Iterator newIterator = container.iterator();
         assertThat(newIterator.next(), is("1"));
-        assertThat(newIterator.hasNext(), is(true));
-        assertThat(newIterator.next(), is("2"));
-        assertThat(newIterator.hasNext(), is(true));
-        assertThat(newIterator.next(), is("3"));
-        assertThat(newIterator.hasNext(), is(true));
-        assertThat(newIterator.next(), is("4"));
-        assertThat(newIterator.hasNext(), is(false));
     }
 }

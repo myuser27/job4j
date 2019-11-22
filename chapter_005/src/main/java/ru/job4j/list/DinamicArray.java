@@ -9,7 +9,6 @@ public class DinamicArray<E> implements Iterable<E> {
     private Object[] container;
     private int size;
     private int index = 0;
-    private int position = 0;
     private int modCount = 0;
 
     public DinamicArray(int size) {
@@ -36,9 +35,9 @@ public class DinamicArray<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        position = 0;
-        int expectModCount = modCount;
         return new Iterator<E>() {
+            int position = 0;
+            int expectModCount = modCount;
             @Override
             public boolean hasNext() {
                 return index > position;

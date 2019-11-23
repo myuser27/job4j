@@ -10,15 +10,11 @@ public class CircleNode {
                 result = true;
                 break;
             }
-            try {
+            if (current.next == null || next.next == null || next.next.next == null) {
+                break;
+            } else {
                 current = current.next;
-            } catch (NullPointerException e) {
-                current = null;
-            }
-            try {
                 next = next.next.next;
-            } catch (NullPointerException e) {
-                next = null;
             }
         }
         return result;

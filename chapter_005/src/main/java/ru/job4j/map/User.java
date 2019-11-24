@@ -16,9 +16,21 @@ public class User {
         this.birthday = birthday;
     }
 
-    public int hashCode() {
-        return 17 * this.name.hashCode() + this.children + this.birthday.hashCode();
+    public boolean equals(Object obj) {
+        boolean result = false;
+        User other = (User) obj;
+        if (this == other
+                || (this.name.equals(other.name)
+                && this.children == other.children
+                && this.birthday.equals(other.birthday))) {
+            result = true;
+        }
+        return result;
     }
+
+    /*public int hashCode() {
+        return 17 * this.name.hashCode() + this.children + this.birthday.hashCode();
+    }*/
 
     public static void main(String[] args) {
         User user1 = new User("Ivan", 10,

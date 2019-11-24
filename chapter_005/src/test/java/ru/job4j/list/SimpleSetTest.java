@@ -42,4 +42,18 @@ public class SimpleSetTest {
         assertThat(it.next(), is("3"));
         assertThat(it.hasNext(), is(false));
     }
+
+    @Test
+    public void addNullTest() {
+        SimpleSet set = new SimpleSet(3);
+        set.add("1");
+        set.add(null);
+        set.add("2");
+        set.add("1");
+        Iterator it = set.iterator();
+        assertThat(it.next(), is("1"));
+        it.next();
+        assertThat(it.next(), is("2"));
+        assertThat(it.hasNext(), is(false));
+    }
 }

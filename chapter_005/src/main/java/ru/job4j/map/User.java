@@ -28,9 +28,9 @@ public class User {
         return result;
     }
 
-    /*public int hashCode() {
+    public int hashCode() {
         return 17 * this.name.hashCode() + this.children + this.birthday.hashCode();
-    }*/
+    }
 
     public static void main(String[] args) {
         User user1 = new User("Ivan", 10,

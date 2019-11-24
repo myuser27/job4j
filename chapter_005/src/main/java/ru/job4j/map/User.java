@@ -16,6 +16,10 @@ public class User {
         this.birthday = birthday;
     }
 
+    public int hashCode() {
+        return 17 * this.name.hashCode() + this.children + this.birthday.hashCode();
+    }
+
     public static void main(String[] args) {
         User user1 = new User("Ivan", 10,
                 new GregorianCalendar(2009, Calendar.JANUARY, 12));

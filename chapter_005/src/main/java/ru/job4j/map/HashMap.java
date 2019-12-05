@@ -4,33 +4,57 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 public class HashMap<K, V> implements Iterable<V> {
-    private Object[][] map;
+    private class Node<K, V> {
+        private K key;
+        private V value;
+
+        public Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public K getKey() {
+            return this.key;
+        }
+
+        public V getValue() {
+            return this.value;
+        }
+
+        public void setKey(K key) {
+            this.key = key;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
+        }
+    }
+
+    private Node[] map;
     private int index = 0;
     private int size;
 
     public HashMap() {
         this.size = 10;
-        this.map = new Object[this.size][2];
+        this.map = new Node[this.size];
     }
 
     public HashMap(int size) {
         this.size = size;
-        this.map = new Object[this.size][2];
+        this.map = new Node[this.size];
     }
 
-    private Object[][] newMap(Object[][] oldMap) {
-        Object[][] map = Arrays.copyOf(oldMap, this.size);
-        map[this.index] = new Object[2];
-        return map;
+    private Node[] newMap(Node[] oldMap) {
+        return Arrays.copyOf(oldMap, this.size);
     }
 
     private int getIndex(K key) {
         int result = -1;
         if (this.index > 0) {
             for (int i = 0, j = this.index - 1; i <= j; i++, j--) {
-                if ((int) this.map[i][0] == key.hashCode()
-                        || (int) this.map[j][0] == key.hashCode()) {
-                    result = (int) this.map[i][0] == key.hashCode() ? i : j;
+                if ((int) this.map[i].getKey() == key.hashCode()
+                        || (int) this.map[j].getKey() == key.hashCode()) {
+                    result = (int) this.map[i].getKey() == key.hashCode() ? i : j;
                     break;
                 }
             }
@@ -47,8 +71,7 @@ public class HashMap<K, V> implements Iterable<V> {
                 this.size++;
                 this.map = newMap(this.map);
             }
-            this.map[this.index][0] = key.hashCode();
-            this.map[this.index++][1] = value;
+            this.map[this.index++] = new Node(key.hashCode(), value);
         }
         return result;
     }
@@ -57,7 +80,7 @@ public class HashMap<K, V> implements Iterable<V> {
         V result = null;
         int index = getIndex(key);
         if (index >= 0) {
-            result = (V) this.map[index][1];
+            result = (V) this.map[index].getValue();
         }
         return result;
     }
@@ -68,11 +91,10 @@ public class HashMap<K, V> implements Iterable<V> {
         if (index >= 0) {
             result = true;
             for (int j = index; j < this.index - 1; j++) {
-                this.map[j][0] = this.map[j + 1][0];
-                this.map[j][1] = this.map[j + 1][1];
+                this.map[j].setKey(this.map[j + 1].getKey());
+                this.map[j].setValue(this.map[j + 1].getValue());
             }
-            this.map[this.index - 1][0] = null;
-            this.map[this.index - 1][1] = null;
+            this.map[this.index - 1] = null;
             this.index--;
             this.size--;
         }
@@ -93,7 +115,7 @@ public class HashMap<K, V> implements Iterable<V> {
             public V next() {
                 V result = null;
                 if (hasNext()) {
-                    result = (V) map[position][1];
+                    result = (V) map[position].getValue();
                     position++;
                 }
                 return result;
